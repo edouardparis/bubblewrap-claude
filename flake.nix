@@ -52,8 +52,9 @@
 
         claudeAlias = "${pkgs.claude-code}/bin/claude --dangerously-skip-permissions --disallowedTools WebSearch,WebFetch";
         customBashProfile = pkgs.writeText "bash_profile" ''
-          if [ -f "/tmp/claude.json" ]; then
-            cp /tmp/claude.json $HOME/.claude.json
+          # Ensure .claude.json exists
+          if [ ! -f "$HOME/.claude.json" ]; then
+            echo '{}' > "$HOME/.claude.json"
           fi
           alias claude="${claudeAlias}"
           claude
@@ -81,6 +82,11 @@
           USER="$(whoami)"
           SANDBOX_NAME="bubblewrap-claude"
 
+          # Ensure .claude.json exists before binding
+          if [ ! -f "$HOME/.claude.json" ]; then
+            echo '{}' > "$HOME/.claude.json"
+          fi
+
           echo "Starting bubblewrap sandbox in: $PROJECT_DIR"
           exec ${pkgs.bubblewrap}/bin/bwrap \
             --die-with-parent \
@@ -101,6 +107,7 @@
             --ro-bind /etc/resolv.conf /etc/resolv.conf \
             --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
             --bind "$HOME/.claude" "/home/$USER/.claude" \
+            --bind "$HOME/.claude.json" "/home/$USER/.claude.json" \
             --bind "$PROJECT_DIR" "/home/$USER/project" \
             --chdir "/home/$USER/project" \
             --setenv HOME "/home/$USER" \
