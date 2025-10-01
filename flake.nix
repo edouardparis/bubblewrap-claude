@@ -105,6 +105,8 @@
             --ro-bind /etc/group /etc/group \
             --ro-bind /etc/resolv.conf /etc/resolv.conf \
             --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
+            --dir /home/$USER/.claude \
+            --bind "$HOME/.claude" "/home/$USER/.claude" \
             $CLAUDE_SETTINGS \
             --bind "$PROJECT_DIR" "/home/$USER/project" \
             --chdir "/home/$USER/project" \
