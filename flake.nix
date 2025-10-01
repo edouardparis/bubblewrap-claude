@@ -78,11 +78,6 @@
             fi
           fi
 
-          CLAUDE_SETTINGS=""
-          if [ -f "$HOME/.claude.json" ]; then
-            CLAUDE_SETTINGS="--ro-bind $HOME/.claude.json /tmp/claude.json"
-          fi
-
           USER="$(whoami)"
           SANDBOX_NAME="bubblewrap-claude"
 
@@ -107,7 +102,6 @@
             --ro-bind /etc/nsswitch.conf /etc/nsswitch.conf \
             --dir /home/$USER/.claude \
             --bind "$HOME/.claude" "/home/$USER/.claude" \
-            $CLAUDE_SETTINGS \
             --bind "$PROJECT_DIR" "/home/$USER/project" \
             --chdir "/home/$USER/project" \
             --setenv HOME "/home/$USER" \
