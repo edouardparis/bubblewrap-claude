@@ -1,5 +1,5 @@
 {pkgs}: let
-  claudePackage = pkgs.callPackage ./claude-package.nix {inherit pkgs;};
+  claudePackage = pkgs.claude-code;
   defaultSystemPrompt = builtins.readFile ./sandbox-prompt.txt;
 
   disallowedTools = "WebSearch,WebFetch,Read(/nix/store/**),Bash(curl:*),Bash(wget:*)";
