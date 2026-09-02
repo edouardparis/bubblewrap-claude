@@ -1,5 +1,12 @@
+# Updating to a new release:
+#   1. Download and verify the release artifact from
+#      https://github.com/anthropics/claude-code/releases (check GPG/checksums).
+#   2. Hash the extracted binary, not the tarball: sha256sum claude
+#      (the fetcher below downloads the bare binary, so the tarball hash won't match).
+#   3. Convert to SRI: nix hash convert --hash-algo sha256 --to sri <hex>
+#   4. Update `version` and the hash in `hashes` below.
 {pkgs}: let
-  version = "2.1.199";
+  version = "2.1.258";
 
   system = pkgs.stdenv.hostPlatform.system;
   platform =
@@ -11,7 +18,7 @@
     } or (throw "Unsupported system: ${system}");
 
   hashes = {
-    "linux-x64" = "sha256-sx39Xj3uI7UcQuDY3bQFFIl4I306q8jLv3fFz4M2fic=";
+    "linux-x64" = "sha256-cE8TNKxl0+ieHGwddmMpOteGphZq/bcbUHUzffYw+XY=";
     "linux-arm64" = "sha256-FIUbUXCxVLAbrKCbupcBcucM3XaLWgEr80e6D1lLStM=";
   };
 
