@@ -1,5 +1,5 @@
 {pkgs}: let
-  version = "2.1.314";
+  version = "2.1.316";
 
   system = pkgs.stdenv.hostPlatform.system;
   platform =
@@ -11,8 +11,8 @@
     } or (throw "Unsupported system: ${system}");
 
   hashes = {
-    "linux-x64" = "sha256-RIcEK0xPXYjUVo9orpiq4LH/rliGTPV/uGhkG8X4RZQ=";
-    "linux-arm64" = "sha256-pmwKj10Mh6Q5lT15eYUZK7y677zi4Ney6qjfMO8PPvI=";
+    "linux-x64" = "sha256-/RPHAAD+w/IRbfvLthISELSikyi/DkYhClndWUpn2CQ=";
+    "linux-arm64" = "sha256-Vc244WLRkEMmlupUAQ4Pyi4Y0G+npxJ/1WO5/9TyJiQ=";
   };
 
   claudeBinary = pkgs.fetchurl {
